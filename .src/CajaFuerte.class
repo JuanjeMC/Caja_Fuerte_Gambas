@@ -24,7 +24,7 @@ End
 
 'Asignar clave nueva
 
-Public Function cambiarClave(antiguaClave As String) As Boolean 'Nos dira si es true, que todo a salido bien. Si no, que algo ha salido mal. 
+Public Function comprobarClave(antiguaClave As String) As Boolean 'Nos dira si es true, que todo a salido bien. Si no, que algo ha salido mal. 
   'Es function porque tiene un proceso con varias posibilidades devueltas.
   'Se nos pedirán ambas claves desde fuera, una nos la dará el propio programa, la otra el usuario.
   If (antiguaClave = clave) Then

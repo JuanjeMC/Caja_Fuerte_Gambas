@@ -36,7 +36,7 @@ Public Sub BNueva_Click()
 
 
     
-  If (miCaja.cambiarClave(TBPassword.Text)) Then 
+  If (miCaja.comprobarClave(TBPassword.Text)) Then 
     LResultado.Foreground = Color.SoftGreen
     LResultado.Text = "Contraseña correcta, introduzca nueva contraseña."
     TBnewPassword.Enabled = True
