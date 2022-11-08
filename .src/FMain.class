@@ -1,0 +1,105 @@
+' Gambas class file
+
+Private miCaja As CajaFuerte
+
+
+
+
+Public Sub Form_Open() 'Cuando le damos al play se inicializa el objeto miCaja, de CajaFuerte
+
+  miCaja = New CajaFuerte
+
+End
+
+
+Public Sub BAbrir_Click()
+
+  'Mirar si han puesto algo potable en el TBPassword
+  'Pasar la contraseña al objeto CajaFuerte
+  'Si me devuelve true, la caja debe estar abierta
+  'En otro caso, la password no va (false)
+If (miCaja.abrirCaja(TBPassword.Text)) Then 'Sustituyo TBPassword.Text dentro de la funcion, en la clase
+LResultado.Foreground = Color.SoftGreen
+  LResultado.Text = "Caja fuerte abierta."
+  
+  
+Else 
+  LResultado.Foreground = Color.Red
+  LResultado.Text = "Contraseña incorrecta."
+Endif
+
+End
+
+
+
+Public Sub BNueva_Click()
+
+
+    
+  If (miCaja.cambiarClave(TBPassword.Text)) Then 
+    LResultado.Foreground = Color.SoftGreen
+    LResultado.Text = "Contraseña correcta, introduzca nueva contraseña."
+    TBnewPassword.Enabled = True
+    TBPassword.Enabled = False
+    BNueva.Visible = False
+    BNueva2.Visible = True
+    BAbrir.Enabled = False
+    BCerrar.Enabled = False
+    
+  Else 
+    LResultado.Foreground = Color.Red
+    LResultado.Text = "Contraseña incorrecta."
+    TBPassword.Enabled = True
+    TBnewPassword.Enabled = False
+    
+  Endif
+    
+End
+
+Public Sub BNueva2_Click() 'AÑADIDO
+'96 No funciona contador.
+Dim contador As Integer
+
+
+
+  If (miCaja.actualizarClave(TBnewPassword.Text)) Then
+    TCarga.Start()
+    For contador = 0 To 96 Step 1
+      LResultado.Text = LResultado.Text & "="
+      
+    Next
+    TCarga.Stop()
+    
+    LResultado.Foreground = Color.SoftCyan
+    LResultado.Text = "Contraseña actualizada."
+    TBnewPassword.Text = ""
+    TBPassword.Text = ""
+    TBPassword.Enabled = True
+    TBnewPassword.Enabled = False
+    BNueva2.Visible = False
+    BNueva.Visible = True
+    BAbrir.Enabled = True
+    BCerrar.Enabled = True
+    
+    Else 
+    LResultado.Foreground = Color.Red
+    LResultado.Text = "Error, la contraseña debe ser de 4 caracteres."
+    Endif 
+    
+End
+
+
+Public Sub BCerrar_Click()
+
+  
+    miCaja.cerrarCaja()
+
+    LResultado.Foreground = Color.Gray
+    LResultado.Text = "Caja fuerte cerrada."
+    
+
+End
+
+
+
+
